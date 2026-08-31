@@ -1,0 +1,143 @@
+"""Coldline — Task 1.2.
+
+===================
+
+File:              tests/contract/test_submission.py
+Component:         Contract tests — Test Submission
+Purpose:           Tests for the public answer and path checks for this Task's submission.
+Interacts With:    Published interfaces and repository boundaries
+Sprint/Task:       Sprint 1 — Project 1 / Task 1.2
+Concepts:          Compatibility, ownership, export safety
+Tools:             Python 3.12, pytest
+"""
+
+from pathlib import Path
+
+import pytest
+import yaml
+
+from tests.contract.submission_validation import (
+    SubmissionError,
+    main,
+    validate_changed_paths,
+    validate_submission,
+)
+
+ROOT = Path(__file__).parents[2]
+
+
+def valid_answers() -> dict[str, object]:
+    """Return a complete fictional answer sheet unrelated to Coldline outcomes."""
+    return {
+        "answers": {
+            "request_flow_map": (
+                "A. Fictional client submits a reading. B. Fictional API validates and "
+                "stores it. C. Fictional API enqueues a job. D. Fictional worker claims "
+                "the job. E. Fictional worker calls a fictional model. F. Fictional "
+                "worker stores the result. G. Fictional worker acknowledges the job."
+            ),
+            "two_outcome_table": (
+                "Success: fictional reading within range, no exception created. "
+                "Exception: fictional reading out of range, exception created and "
+                "processed to completion."
+            ),
+            "boundary_evidence": (
+                "API: fictional log line shows 202 Accepted. Queue: fictional XADD "
+                "confirmed via stream length. Worker: fictional log line shows job "
+                "claimed. Model: fictional summary returned. DB: fictional record "
+                "shows COMPLETED state."
+            ),
+            "evidence_gaps": (
+                "The fictional worker trace does not share a Trace ID with the fictional API trace."
+            ),
+            "trace_narrative": (
+                "Observed in the fictional API log that the reading was accepted at T+0ms. "
+                "Observed in the fictional worker log that processing began at T+120ms. "
+                "This indicates the message reached the queue within 120ms. "
+                "Cannot be verified because no span links the two fictional traces together."
+            ),
+        }
+    }
+
+
+def test_complete_answer_shape_passes_public_validation(tmp_path: Path) -> None:
+    """A complete direct-answer mapping must pass syntax and schema validation."""
+    submission = tmp_path / "submission.yaml"
+    submission.write_text(yaml.safe_dump(valid_answers()), encoding="utf-8")
+
+    validate_submission(submission, ROOT / "docs/contracts/submission.schema.json")
+
+
+def test_blank_template_fails_with_field_address(tmp_path: Path) -> None:
+    """An untouched answer sheet must identify an incomplete field."""
+    submission = tmp_path / "submission.yaml"
+    submission.write_text((ROOT / "submission.yaml").read_text(encoding="utf-8"), encoding="utf-8")
+
+    with pytest.raises(SubmissionError, match="answers.request_flow_map"):
+        validate_submission(submission, ROOT / "docs/contracts/submission.schema.json")
+
+
+def test_malformed_yaml_is_rejected(tmp_path: Path) -> None:
+    """A syntactically invalid answer sheet must fail safely."""
+    submission = tmp_path / "submission.yaml"
+    submission.write_text("answers: [unterminated", encoding="utf-8")
+
+    with pytest.raises(SubmissionError, match="valid YAML"):
+        validate_submission(submission, ROOT / "docs/contracts/submission.schema.json")
+
+
+def test_unexpected_answer_field_is_rejected(tmp_path: Path) -> None:
+    """Fields outside the published direct-answer schema must fail validation."""
+    answers = valid_answers()
+    answer_mapping = answers["answers"]
+    assert isinstance(answer_mapping, dict)
+    answer_mapping["repair_hint"] = "not part of this Task's schema"
+    submission = tmp_path / "submission.yaml"
+    submission.write_text(yaml.safe_dump(answers), encoding="utf-8")
+
+    with pytest.raises(SubmissionError, match="Additional properties"):
+        validate_submission(submission, ROOT / "docs/contracts/submission.schema.json")
+
+
+def test_exact_sample_copy_is_rejected(tmp_path: Path) -> None:
+    """The fictional sample must not be accepted as a student submission."""
+    submission = tmp_path / "submission.yaml"
+    submission.write_text(
+        (ROOT / "submission-sample.yaml").read_text(encoding="utf-8"),
+        encoding="utf-8",
+    )
+
+    with pytest.raises(SubmissionError, match="fictional sample"):
+        validate_submission(
+            submission,
+            ROOT / "docs/contracts/submission.schema.json",
+            sample_path=ROOT / "submission-sample.yaml",
+        )
+
+
+def test_only_submission_yaml_is_permitted() -> None:
+    """The advisory path gate must reject a protected source change."""
+    validate_changed_paths(["submission.yaml"])
+
+    with pytest.raises(SubmissionError, match="src/api"):
+        validate_changed_paths(["src/api/routes.py"])
+
+
+def test_public_entrypoint_reports_an_incomplete_answer_sheet(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """Catch a verifier entrypoint that skips the real submission contract."""
+    (tmp_path / "docs/contracts").mkdir(parents=True)
+    (tmp_path / "submission.yaml").write_text(
+        (ROOT / "submission.yaml").read_text(encoding="utf-8"), encoding="utf-8"
+    )
+    (tmp_path / "submission-sample.yaml").write_text(
+        (ROOT / "submission-sample.yaml").read_text(encoding="utf-8"), encoding="utf-8"
+    )
+    (tmp_path / "docs/contracts/submission.schema.json").write_text(
+        (ROOT / "docs/contracts/submission.schema.json").read_text(encoding="utf-8"),
+        encoding="utf-8",
+    )
+
+    assert main(tmp_path, changed_paths=[]) == 1
+    assert "answers.request_flow_map is incomplete" in capsys.readouterr().err

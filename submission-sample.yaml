@@ -1,0 +1,30 @@
+# Coldline - Task 1.2
+# File: submission-sample.yaml
+# Component: Fictional answer example
+# Purpose: Show the required answer shape without giving Task answers.
+# Interacts With: Submission schema and public verifier
+# Sprint/Task: Sprint 1 - Project 1 / Task 1.2
+# Concepts: Evidence structure
+# Tools: YAML
+
+# Fictional shape example only. These answers do not describe Coldline.
+answers:
+  request_flow_map: |
+    A. Fictional client submits a reading. B. Fictional API validates and stores it.
+    C. Fictional API enqueues a job. D. Fictional worker claims the job.
+    E. Fictional worker calls a fictional model. F. Fictional worker stores the result.
+    G. Fictional worker acknowledges the job.
+  two_outcome_table: |
+    Success: fictional reading within range, no exception created.
+    Exception: fictional reading out of range, exception created and processed to completion.
+  boundary_evidence: |
+    API: fictional log line shows 202 Accepted. Queue: fictional XADD confirmed via stream length.
+    Worker: fictional log line shows job claimed. Model: fictional summary returned.
+    DB: fictional record shows COMPLETED state.
+  evidence_gaps: |
+    The fictional worker trace does not share a Trace ID with the fictional API trace.
+  trace_narrative: |
+    Observed in the fictional API log that the reading was accepted at T+0ms.
+    Observed in the fictional worker log that processing began at T+120ms.
+    This indicates the message reached the queue within 120ms.
+    Cannot be verified because no span links the two fictional traces together.

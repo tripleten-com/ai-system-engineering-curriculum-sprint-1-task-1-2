@@ -1,0 +1,29 @@
+# Coldline - Task 1.2
+# File: submission.yaml
+# Component: Student answer sheet
+# Purpose: Record the Task 1.2 exception-path tracing investigation.
+# Interacts With: Submission schema and public verifier
+# Sprint/Task: Sprint 1 - Project 1 / Task 1.2
+# Concepts: End-to-end tracing, evidence-based diagnosis
+# Tools: YAML
+
+# Complete each answer after running the published exception scenario.
+# Empty values and placeholder text fail public verification.
+# Do not submit secrets, personal data, local absolute paths, or protected evaluator details.
+# See submission-sample.yaml for a completed fictional shape.
+answers:
+  # 100-2000 characters. Chronological Step A-G description of the request flow.
+  request_flow_map: |
+    Replace this line with your end-to-end request flow map.
+  # 100-1000 characters. Success vs. exception outcome comparison.
+  two_outcome_table: |
+    Replace this line with your two-outcome comparison.
+  # 200-2000 characters. API/Queue/Worker/Model/DB evidence, one row each.
+  boundary_evidence: |
+    Replace this line with your boundary-by-boundary evidence.
+  # 40-1000 characters. The telemetry gaps you found (trace break, metric issue).
+  evidence_gaps: |
+    Replace this line with the evidence gaps you found.
+  # 200-2000 characters. Chronological Observations/Inferences/Uncertainties narrative.
+  trace_narrative: |
+    Replace this line with your trace evidence narrative.
