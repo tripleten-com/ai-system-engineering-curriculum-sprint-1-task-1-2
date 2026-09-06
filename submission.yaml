@@ -11,6 +11,7 @@
 # Empty values and placeholder text fail public verification.
 # Do not submit secrets, personal data, local absolute paths, or protected evaluator details.
 # See submission-sample.yaml for a completed fictional shape.
+# The `|` begins a multiline string. Keep the `|` and replace the indented placeholder text.
 answers:
   # 100-2000 characters. Chronological Step A-G description of the request flow.
   request_flow_map: |
