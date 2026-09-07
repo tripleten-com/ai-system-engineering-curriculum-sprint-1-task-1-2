@@ -28,37 +28,8 @@ ROOT = Path(__file__).parents[2]
 
 
 def valid_answers() -> dict[str, object]:
-    """Return a complete fictional answer sheet unrelated to Coldline outcomes."""
-    return {
-        "answers": {
-            "request_flow_map": (
-                "A. Fictional client submits a reading. B. Fictional API validates and "
-                "stores it. C. Fictional API enqueues a job. D. Fictional worker claims "
-                "the job. E. Fictional worker calls a fictional model. F. Fictional "
-                "worker stores the result. G. Fictional worker acknowledges the job."
-            ),
-            "two_outcome_table": (
-                "Success: fictional reading within range, no exception created. "
-                "Exception: fictional reading out of range, exception created and "
-                "processed to completion."
-            ),
-            "boundary_evidence": (
-                "API: fictional log line shows 202 Accepted. Queue: fictional XADD "
-                "confirmed via stream length. Worker: fictional log line shows job "
-                "claimed. Model: fictional summary returned. DB: fictional record "
-                "shows COMPLETED state."
-            ),
-            "evidence_gaps": (
-                "The fictional worker trace does not share a Trace ID with the fictional API trace."
-            ),
-            "trace_narrative": (
-                "Observed in the fictional API log that the reading was accepted at T+0ms. "
-                "Observed in the fictional worker log that processing began at T+120ms. "
-                "This indicates the message reached the queue within 120ms. "
-                "Cannot be verified because no span links the two fictional traces together."
-            ),
-        }
-    }
+    """Use the fictional teaching sample for shape tests, never a real answer key."""
+    return _load_one_document(ROOT / "submission-sample.yaml")
 
 
 def test_complete_answer_shape_passes_public_validation(tmp_path: Path) -> None:
@@ -96,7 +67,7 @@ def test_unexpected_answer_field_is_rejected(tmp_path: Path) -> None:
     submission = tmp_path / "submission.yaml"
     submission.write_text(yaml.safe_dump(answers), encoding="utf-8")
 
-    with pytest.raises(SubmissionError, match="Additional properties"):
+    with pytest.raises(SubmissionError, match="additionalProperties"):
         validate_submission(submission, ROOT / "docs/contracts/submission.schema.json")
 
 
@@ -141,7 +112,7 @@ def test_public_entrypoint_reports_an_incomplete_answer_sheet(
     )
 
     assert main(tmp_path, changed_paths=[]) == 1
-    assert "answers.request_flow_map is incomplete" in capsys.readouterr().err
+    assert "answers.request_flow_map" in capsys.readouterr().err
 
 
 @pytest.mark.parametrize(

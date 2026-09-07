@@ -1,26 +1,825 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Task 1.2 deterministic answer contract",
   "type": "object",
-  "additionalProperties": false,
-  "required": ["answers"],
   "properties": {
     "answers": {
       "type": "object",
-      "additionalProperties": false,
+      "properties": {
+        "request_flow_map": {
+          "type": "object",
+          "properties": {
+            "A": {
+              "type": "object",
+              "properties": {
+                "owner": {
+                  "type": "string",
+                  "enum": [
+                    "sensor",
+                    "api",
+                    "worker"
+                  ],
+                  "description": "Process responsible for this step."
+                },
+                "operation": {
+                  "type": "string",
+                  "enum": [
+                    "send-http-alert",
+                    "validate-and-persist-queued",
+                    "publish-job",
+                    "return-http-response",
+                    "consume-job",
+                    "call-model-provider",
+                    "persist-completed-summary"
+                  ],
+                  "description": "Operation performed by this step."
+                },
+                "execution": {
+                  "type": "string",
+                  "enum": [
+                    "synchronous",
+                    "asynchronous"
+                  ],
+                  "description": "Synchronous HTTP path or background processing."
+                },
+                "predecessors": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "A",
+                      "B",
+                      "C",
+                      "D",
+                      "E",
+                      "F",
+                      "G"
+                    ]
+                  },
+                  "uniqueItems": true,
+                  "x-order-independent": true,
+                  "description": "Immediate causal predecessors only. Do not add an ordering edge from timestamps alone."
+                }
+              },
+              "required": [
+                "owner",
+                "operation",
+                "execution",
+                "predecessors"
+              ],
+              "additionalProperties": false
+            },
+            "B": {
+              "type": "object",
+              "properties": {
+                "owner": {
+                  "type": "string",
+                  "enum": [
+                    "sensor",
+                    "api",
+                    "worker"
+                  ],
+                  "description": "Process responsible for this step."
+                },
+                "operation": {
+                  "type": "string",
+                  "enum": [
+                    "send-http-alert",
+                    "validate-and-persist-queued",
+                    "publish-job",
+                    "return-http-response",
+                    "consume-job",
+                    "call-model-provider",
+                    "persist-completed-summary"
+                  ],
+                  "description": "Operation performed by this step."
+                },
+                "execution": {
+                  "type": "string",
+                  "enum": [
+                    "synchronous",
+                    "asynchronous"
+                  ],
+                  "description": "Synchronous HTTP path or background processing."
+                },
+                "predecessors": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "A",
+                      "B",
+                      "C",
+                      "D",
+                      "E",
+                      "F",
+                      "G"
+                    ]
+                  },
+                  "uniqueItems": true,
+                  "x-order-independent": true,
+                  "description": "Immediate causal predecessors only. Do not add an ordering edge from timestamps alone."
+                }
+              },
+              "required": [
+                "owner",
+                "operation",
+                "execution",
+                "predecessors"
+              ],
+              "additionalProperties": false
+            },
+            "C": {
+              "type": "object",
+              "properties": {
+                "owner": {
+                  "type": "string",
+                  "enum": [
+                    "sensor",
+                    "api",
+                    "worker"
+                  ],
+                  "description": "Process responsible for this step."
+                },
+                "operation": {
+                  "type": "string",
+                  "enum": [
+                    "send-http-alert",
+                    "validate-and-persist-queued",
+                    "publish-job",
+                    "return-http-response",
+                    "consume-job",
+                    "call-model-provider",
+                    "persist-completed-summary"
+                  ],
+                  "description": "Operation performed by this step."
+                },
+                "execution": {
+                  "type": "string",
+                  "enum": [
+                    "synchronous",
+                    "asynchronous"
+                  ],
+                  "description": "Synchronous HTTP path or background processing."
+                },
+                "predecessors": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "A",
+                      "B",
+                      "C",
+                      "D",
+                      "E",
+                      "F",
+                      "G"
+                    ]
+                  },
+                  "uniqueItems": true,
+                  "x-order-independent": true,
+                  "description": "Immediate causal predecessors only. Do not add an ordering edge from timestamps alone."
+                }
+              },
+              "required": [
+                "owner",
+                "operation",
+                "execution",
+                "predecessors"
+              ],
+              "additionalProperties": false
+            },
+            "D": {
+              "type": "object",
+              "properties": {
+                "owner": {
+                  "type": "string",
+                  "enum": [
+                    "sensor",
+                    "api",
+                    "worker"
+                  ],
+                  "description": "Process responsible for this step."
+                },
+                "operation": {
+                  "type": "string",
+                  "enum": [
+                    "send-http-alert",
+                    "validate-and-persist-queued",
+                    "publish-job",
+                    "return-http-response",
+                    "consume-job",
+                    "call-model-provider",
+                    "persist-completed-summary"
+                  ],
+                  "description": "Operation performed by this step."
+                },
+                "execution": {
+                  "type": "string",
+                  "enum": [
+                    "synchronous",
+                    "asynchronous"
+                  ],
+                  "description": "Synchronous HTTP path or background processing."
+                },
+                "predecessors": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "A",
+                      "B",
+                      "C",
+                      "D",
+                      "E",
+                      "F",
+                      "G"
+                    ]
+                  },
+                  "uniqueItems": true,
+                  "x-order-independent": true,
+                  "description": "Immediate causal predecessors only. Do not add an ordering edge from timestamps alone."
+                }
+              },
+              "required": [
+                "owner",
+                "operation",
+                "execution",
+                "predecessors"
+              ],
+              "additionalProperties": false
+            },
+            "E": {
+              "type": "object",
+              "properties": {
+                "owner": {
+                  "type": "string",
+                  "enum": [
+                    "sensor",
+                    "api",
+                    "worker"
+                  ],
+                  "description": "Process responsible for this step."
+                },
+                "operation": {
+                  "type": "string",
+                  "enum": [
+                    "send-http-alert",
+                    "validate-and-persist-queued",
+                    "publish-job",
+                    "return-http-response",
+                    "consume-job",
+                    "call-model-provider",
+                    "persist-completed-summary"
+                  ],
+                  "description": "Operation performed by this step."
+                },
+                "execution": {
+                  "type": "string",
+                  "enum": [
+                    "synchronous",
+                    "asynchronous"
+                  ],
+                  "description": "Synchronous HTTP path or background processing."
+                },
+                "predecessors": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "A",
+                      "B",
+                      "C",
+                      "D",
+                      "E",
+                      "F",
+                      "G"
+                    ]
+                  },
+                  "uniqueItems": true,
+                  "x-order-independent": true,
+                  "description": "Immediate causal predecessors only. Do not add an ordering edge from timestamps alone."
+                }
+              },
+              "required": [
+                "owner",
+                "operation",
+                "execution",
+                "predecessors"
+              ],
+              "additionalProperties": false
+            },
+            "F": {
+              "type": "object",
+              "properties": {
+                "owner": {
+                  "type": "string",
+                  "enum": [
+                    "sensor",
+                    "api",
+                    "worker"
+                  ],
+                  "description": "Process responsible for this step."
+                },
+                "operation": {
+                  "type": "string",
+                  "enum": [
+                    "send-http-alert",
+                    "validate-and-persist-queued",
+                    "publish-job",
+                    "return-http-response",
+                    "consume-job",
+                    "call-model-provider",
+                    "persist-completed-summary"
+                  ],
+                  "description": "Operation performed by this step."
+                },
+                "execution": {
+                  "type": "string",
+                  "enum": [
+                    "synchronous",
+                    "asynchronous"
+                  ],
+                  "description": "Synchronous HTTP path or background processing."
+                },
+                "predecessors": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "A",
+                      "B",
+                      "C",
+                      "D",
+                      "E",
+                      "F",
+                      "G"
+                    ]
+                  },
+                  "uniqueItems": true,
+                  "x-order-independent": true,
+                  "description": "Immediate causal predecessors only. Do not add an ordering edge from timestamps alone."
+                }
+              },
+              "required": [
+                "owner",
+                "operation",
+                "execution",
+                "predecessors"
+              ],
+              "additionalProperties": false
+            },
+            "G": {
+              "type": "object",
+              "properties": {
+                "owner": {
+                  "type": "string",
+                  "enum": [
+                    "sensor",
+                    "api",
+                    "worker"
+                  ],
+                  "description": "Process responsible for this step."
+                },
+                "operation": {
+                  "type": "string",
+                  "enum": [
+                    "send-http-alert",
+                    "validate-and-persist-queued",
+                    "publish-job",
+                    "return-http-response",
+                    "consume-job",
+                    "call-model-provider",
+                    "persist-completed-summary"
+                  ],
+                  "description": "Operation performed by this step."
+                },
+                "execution": {
+                  "type": "string",
+                  "enum": [
+                    "synchronous",
+                    "asynchronous"
+                  ],
+                  "description": "Synchronous HTTP path or background processing."
+                },
+                "predecessors": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "A",
+                      "B",
+                      "C",
+                      "D",
+                      "E",
+                      "F",
+                      "G"
+                    ]
+                  },
+                  "uniqueItems": true,
+                  "x-order-independent": true,
+                  "description": "Immediate causal predecessors only. Do not add an ordering edge from timestamps alone."
+                }
+              },
+              "required": [
+                "owner",
+                "operation",
+                "execution",
+                "predecessors"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E",
+            "F",
+            "G"
+          ],
+          "additionalProperties": false,
+          "description": "A-G identify the seven scenario operations; report immediate causal predecessors."
+        },
+        "two_outcome_table": {
+          "type": "object",
+          "properties": {
+            "normal": {
+              "type": "object",
+              "properties": {
+                "http_status": {
+                  "type": "integer",
+                  "enum": [
+                    200,
+                    202,
+                    400,
+                    422,
+                    500
+                  ],
+                  "description": "Observed HTTP status."
+                },
+                "queued": {
+                  "type": "string",
+                  "enum": [
+                    "yes",
+                    "no"
+                  ],
+                  "description": "Does this reading create queued exception work?"
+                },
+                "model_called": {
+                  "type": "string",
+                  "enum": [
+                    "yes",
+                    "no"
+                  ],
+                  "description": "Does this reading invoke ModelProvider?"
+                },
+                "persistence": {
+                  "type": "string",
+                  "enum": [
+                    "no-exception-record",
+                    "queued-then-completed",
+                    "failed-record"
+                  ],
+                  "description": "Persistence outcome for this reading."
+                }
+              },
+              "required": [
+                "http_status",
+                "queued",
+                "model_called",
+                "persistence"
+              ],
+              "additionalProperties": false
+            },
+            "exception": {
+              "type": "object",
+              "properties": {
+                "http_status": {
+                  "type": "integer",
+                  "enum": [
+                    200,
+                    202,
+                    400,
+                    422,
+                    500
+                  ],
+                  "description": "Observed HTTP status."
+                },
+                "queued": {
+                  "type": "string",
+                  "enum": [
+                    "yes",
+                    "no"
+                  ],
+                  "description": "Does this reading create queued exception work?"
+                },
+                "model_called": {
+                  "type": "string",
+                  "enum": [
+                    "yes",
+                    "no"
+                  ],
+                  "description": "Does this reading invoke ModelProvider?"
+                },
+                "persistence": {
+                  "type": "string",
+                  "enum": [
+                    "no-exception-record",
+                    "queued-then-completed",
+                    "failed-record"
+                  ],
+                  "description": "Persistence outcome for this reading."
+                }
+              },
+              "required": [
+                "http_status",
+                "queued",
+                "model_called",
+                "persistence"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "normal",
+            "exception"
+          ],
+          "additionalProperties": false
+        },
+        "boundary_evidence": {
+          "type": "object",
+          "properties": {
+            "API": {
+              "type": "string",
+              "enum": [
+                "HTTP",
+                "QUEUE",
+                "WORKER",
+                "MODEL",
+                "STATE",
+                "API-TRACE",
+                "METRIC",
+                "SRC-API",
+                "SRC-ROUTES",
+                "SRC-WORKER",
+                "SRC-METRIC",
+                "SRC-QUEUE",
+                "SRC-RUNTIME",
+                "sample-only"
+              ],
+              "description": "Select primary evidence for the API boundary: response, stream, processing/log, model span or saved record as applicable."
+            },
+            "Queue": {
+              "type": "string",
+              "enum": [
+                "HTTP",
+                "QUEUE",
+                "WORKER",
+                "MODEL",
+                "STATE",
+                "API-TRACE",
+                "METRIC",
+                "SRC-API",
+                "SRC-ROUTES",
+                "SRC-WORKER",
+                "SRC-METRIC",
+                "SRC-QUEUE",
+                "SRC-RUNTIME",
+                "sample-only"
+              ],
+              "description": "Select primary evidence for the Queue boundary: response, stream, processing/log, model span or saved record as applicable."
+            },
+            "Worker": {
+              "type": "string",
+              "enum": [
+                "HTTP",
+                "QUEUE",
+                "WORKER",
+                "MODEL",
+                "STATE",
+                "API-TRACE",
+                "METRIC",
+                "SRC-API",
+                "SRC-ROUTES",
+                "SRC-WORKER",
+                "SRC-METRIC",
+                "SRC-QUEUE",
+                "SRC-RUNTIME",
+                "sample-only"
+              ],
+              "description": "Select primary evidence for the Worker boundary: response, stream, processing/log, model span or saved record as applicable."
+            },
+            "Model": {
+              "type": "string",
+              "enum": [
+                "HTTP",
+                "QUEUE",
+                "WORKER",
+                "MODEL",
+                "STATE",
+                "API-TRACE",
+                "METRIC",
+                "SRC-API",
+                "SRC-ROUTES",
+                "SRC-WORKER",
+                "SRC-METRIC",
+                "SRC-QUEUE",
+                "SRC-RUNTIME",
+                "sample-only"
+              ],
+              "description": "Select primary evidence for the Model boundary: response, stream, processing/log, model span or saved record as applicable."
+            },
+            "Database": {
+              "type": "string",
+              "enum": [
+                "HTTP",
+                "QUEUE",
+                "WORKER",
+                "MODEL",
+                "STATE",
+                "API-TRACE",
+                "METRIC",
+                "SRC-API",
+                "SRC-ROUTES",
+                "SRC-WORKER",
+                "SRC-METRIC",
+                "SRC-QUEUE",
+                "SRC-RUNTIME",
+                "sample-only"
+              ],
+              "description": "Select primary evidence for the Database boundary: response, stream, processing/log, model span or saved record as applicable."
+            }
+          },
+          "required": [
+            "API",
+            "Queue",
+            "Worker",
+            "Model",
+            "Database"
+          ],
+          "additionalProperties": false
+        },
+        "evidence_gaps": {
+          "type": "object",
+          "properties": {
+            "trace_context": {
+              "type": "string",
+              "enum": [
+                "continuous",
+                "queue-context-not-propagated",
+                "no-api-span"
+              ],
+              "description": "Trace boundary diagnosis."
+            },
+            "metric_unit": {
+              "type": "string",
+              "enum": [
+                "seconds-correct",
+                "milliseconds-under-seconds-name",
+                "no-duration-metric"
+              ],
+              "description": "Processing histogram observation unit."
+            },
+            "metric_labels": {
+              "type": "string",
+              "enum": [
+                "bounded-aggregate",
+                "request-id-cardinality",
+                "no-metric-labels-known"
+              ],
+              "description": "Processing histogram series identity."
+            }
+          },
+          "required": [
+            "trace_context",
+            "metric_unit",
+            "metric_labels"
+          ],
+          "additionalProperties": false
+        },
+        "claim_classifications": {
+          "type": "object",
+          "properties": {
+            "api_acceptance_observed": {
+              "type": "string",
+              "enum": [
+                "observation",
+                "inference",
+                "not-established"
+              ],
+              "description": "The out-of-range POST returned HTTP202."
+            },
+            "separate_trace_ids_observed": {
+              "type": "string",
+              "enum": [
+                "observation",
+                "inference",
+                "not-established"
+              ],
+              "description": "The publisher and worker spans for the captured exception have different trace IDs."
+            },
+            "queue_handoff_cause": {
+              "type": "string",
+              "enum": [
+                "observation",
+                "inference",
+                "not-established"
+              ],
+              "description": "The missing queue carrier and worker context extraction explain the disconnected trace."
+            },
+            "production_slo_met": {
+              "type": "string",
+              "enum": [
+                "observation",
+                "inference",
+                "not-established"
+              ],
+              "description": "This local run establishes the production p95 latency SLO."
+            },
+            "sensor_to_dispatcher_latency": {
+              "type": "string",
+              "enum": [
+                "observation",
+                "inference",
+                "not-established"
+              ],
+              "description": "The supplied data establishes elapsed time from physical sensor detection to a dispatcher viewing the summary."
+            },
+            "model_nested_in_worker": {
+              "type": "string",
+              "enum": [
+                "observation",
+                "inference",
+                "not-established"
+              ],
+              "description": "The model_provider.summarize span is a child of the processing span."
+            }
+          },
+          "required": [
+            "api_acceptance_observed",
+            "separate_trace_ids_observed",
+            "queue_handoff_cause",
+            "production_slo_met",
+            "sensor_to_dispatcher_latency",
+            "model_nested_in_worker"
+          ],
+          "additionalProperties": false
+        },
+        "timing_interpretation": {
+          "type": "object",
+          "properties": {
+            "accepted_to_terminal_seconds": {
+              "type": "number",
+              "minimum": 0,
+              "x-absolute-tolerance": 0.001,
+              "description": "Subtract persisted_record.accepted_at from updated_at. Use seconds, rounded to three decimal places; absolute tolerance 0.001 seconds."
+            },
+            "worker_span_seconds": {
+              "type": "number",
+              "minimum": 0,
+              "x-absolute-tolerance": 0.001,
+              "description": "Convert coldline.process_exception duration from Jaeger microseconds. Use seconds, rounded to three decimal places; absolute tolerance 0.001 seconds."
+            },
+            "model_span_seconds": {
+              "type": "number",
+              "minimum": 0,
+              "x-absolute-tolerance": 0.001,
+              "description": "Convert model_provider.summarize duration from Jaeger microseconds. Use seconds, rounded to three decimal places; absolute tolerance 0.001 seconds."
+            },
+            "coverage": {
+              "type": "string",
+              "enum": [
+                "sensor-to-dispatcher",
+                "accepted-to-terminal-persistence",
+                "http-round-trip"
+              ],
+              "description": "What interval do the record timestamps establish?"
+            }
+          },
+          "required": [
+            "accepted_to_terminal_seconds",
+            "worker_span_seconds",
+            "model_span_seconds",
+            "coverage"
+          ],
+          "additionalProperties": false
+        }
+      },
       "required": [
         "request_flow_map",
         "two_outcome_table",
         "boundary_evidence",
         "evidence_gaps",
-        "trace_narrative"
+        "claim_classifications",
+        "timing_interpretation"
       ],
-      "properties": {
-        "request_flow_map": { "type": "string", "minLength": 100, "maxLength": 2000 },
-        "two_outcome_table": { "type": "string", "minLength": 100, "maxLength": 1000 },
-        "boundary_evidence": { "type": "string", "minLength": 200, "maxLength": 2000 },
-        "evidence_gaps": { "type": "string", "minLength": 40, "maxLength": 1000 },
-        "trace_narrative": { "type": "string", "minLength": 200, "maxLength": 2000 }
-      }
+      "additionalProperties": false
     }
-  }
+  },
+  "required": [
+    "answers"
+  ],
+  "additionalProperties": false
 }

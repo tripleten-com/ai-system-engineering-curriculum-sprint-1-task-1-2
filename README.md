@@ -57,7 +57,7 @@ poe verify
 | `poe smoke` | Check the initialized running platform |
 | `poe e2e` | Run the external API-to-worker workflow |
 | `poe verify` | Run the public student verification path |
-| `poe restart` | Restart API and worker processes |
+| `poe restart` | Restart the existing API and worker containers **without rebuilding**; run `poe start` instead after editing source |
 | `poe stop` | Remove containers and the network, keeping named volumes |
 | `poe reset` | Remove containers, the network, and local named volumes |
 
@@ -138,22 +138,34 @@ runtime evidence rather than from this guide.
 
 ## Task boundary
 
-Task 1.2 asks you to investigate — not fix — how one exception request travels across the synchronous
-API and asynchronous worker boundary, and to document exactly where the telemetry trail breaks.
+Investigate the synchronous API and asynchronous worker path without changing application code. Record evidence-linked flow, outcomes, boundary associations, telemetry gaps, timings, and claim classifications.
 
 Only these paths are student-editable:
 
 - `submission.yaml`
 
-The public verifier checks answer structure and completeness. It cannot grade engineering judgment. The
-instructor reviews the quality of the evidence and reasoning.
+Read [the evidence guide](docs/student/evidence-guide.md) and the versioned
+[fixed evidence pack](docs/student/evidence-pack.json) before completing `submission.yaml`.
+The sheet and its fictional sample show exact objects, values, and units. Graded
+analysis comes from this supplied pack; actual local investigations remain required
+and provide evidence for the final instructor defense. Keep those sources distinct.
+
+The public verifier checks answer structure, permitted changes, and the Task's
+published runtime behavior and public arithmetic checks. Protected automated answer
+checks establish semantic correctness against the public fixed pack. These protected
+answer checks are distinct from the single Task 1.6 held-out runtime scenario.
+Deterministic CI accepts Task
+answers; there is no separate instructor Task-answer grade. Green required public and protected CI opens
+the next Task. Sprint completion requires all six Task PRs CI-green and one final
+instructor defense covering empirical reasoning, uncertainty, alternatives, and judgment.
 
 ### Student walkthrough
 
-See **Task 1.2: AI Exception-Path Tracing** in your course platform for the full walkthrough. In outline: run `poe scenario`, trace the request across the API, Redis
-Streams, worker, model provider, and database, then document the flow, the two possible outcomes, the
-boundary-by-boundary evidence, the telemetry gaps you find, and a chronological trace narrative in
-`submission.yaml`.
+Run `poe scenario`, inspect your logs and Jaeger traces, and preserve your empirical observations for the final defense. Complete the graded flow records, outcomes, boundary evidence, telemetry-gap and claim classifications, and timing interpretation from the fixed pack. The flow records use immediate causal predecessors so concurrent work is not forced into a total sequence.
+
+Run `./.tools/bin/uv run --frozen poe verify` from the repository root before
+submitting a feature-branch PR against `main`. See the course Task lesson for the
+three-Step walkthrough and exact matching acceptance/self-review criteria.
 
 ## Operational limits
 
