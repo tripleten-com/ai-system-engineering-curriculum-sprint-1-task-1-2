@@ -1,30 +1,202 @@
 # Coldline - Task 1.2
 # File: submission.yaml
-# Component: Student answer sheet
-# Purpose: Record the Task 1.2 exception-path tracing investigation.
-# Interacts With: Submission schema and public verifier
-# Sprint/Task: Sprint 1 - Project 1 / Task 1.2
-# Concepts: End-to-end tracing, evidence-based diagnosis
+# Component: Structured student answer sheet
+# Purpose: Record bounded evidence interpretations.
+# Interacts With: Public schema and protected checker
+# Sprint/Task: Sprint 1 / Task 1.2
+# Concepts: Evidence interpretation and deterministic assessment
 # Tools: YAML
-
-# Complete each answer after running the published exception scenario.
-# Empty values and placeholder text fail public verification.
-# Do not submit secrets, personal data, local absolute paths, or protected evaluator details.
-# See submission-sample.yaml for a completed fictional shape.
-# The `|` begins a multiline string. Keep the `|` and replace the indented placeholder text.
+# Use docs/student/evidence-pack.json for graded analysis.
+# Local experiments remain required practical work and final defense evidence.
+# Blank values are incomplete; no free-text field is graded.
+# Complete answers.
 answers:
-  # 100-2000 characters. Chronological Step A-G description of the request flow.
-  request_flow_map: |
-    Replace this line with your end-to-end request flow map.
-  # 100-1000 characters. Success vs. exception outcome comparison.
-  two_outcome_table: |
-    Replace this line with your two-outcome comparison.
-  # 200-2000 characters. API/Queue/Worker/Model/DB evidence, one row each.
-  boundary_evidence: |
-    Replace this line with your boundary-by-boundary evidence.
-  # 40-1000 characters. The telemetry gaps you found (trace break, metric issue).
-  evidence_gaps: |
-    Replace this line with the evidence gaps you found.
-  # 200-2000 characters. Chronological Observations/Inferences/Uncertainties narrative.
-  trace_narrative: |
-    Replace this line with your trace evidence narrative.
+  # A-G identify the seven scenario operations; report immediate causal predecessors.
+  request_flow_map:
+    # Complete A.
+    A:
+      # Process responsible for this step.
+      # Choices: sensor, api, worker
+      owner:
+      # Operation performed by this step.
+      # Choices: send-http-alert, validate-and-persist-queued, publish-job, return-http-response, consume-job, call-model-provider, persist-completed-summary
+      operation:
+      # Synchronous HTTP path or background processing.
+      # Choices: synchronous, asynchronous
+      execution:
+      # Immediate causal predecessors only. Do not add an ordering edge from timestamps alone.
+      # YAML list; choices: A, B, C, D, E, F, G. Use [] for none.
+      predecessors:
+    # Complete B.
+    B:
+      # Process responsible for this step.
+      # Choices: sensor, api, worker
+      owner:
+      # Operation performed by this step.
+      # Choices: send-http-alert, validate-and-persist-queued, publish-job, return-http-response, consume-job, call-model-provider, persist-completed-summary
+      operation:
+      # Synchronous HTTP path or background processing.
+      # Choices: synchronous, asynchronous
+      execution:
+      # Immediate causal predecessors only. Do not add an ordering edge from timestamps alone.
+      # YAML list; choices: A, B, C, D, E, F, G. Use [] for none.
+      predecessors:
+    # Complete C.
+    C:
+      # Process responsible for this step.
+      # Choices: sensor, api, worker
+      owner:
+      # Operation performed by this step.
+      # Choices: send-http-alert, validate-and-persist-queued, publish-job, return-http-response, consume-job, call-model-provider, persist-completed-summary
+      operation:
+      # Synchronous HTTP path or background processing.
+      # Choices: synchronous, asynchronous
+      execution:
+      # Immediate causal predecessors only. Do not add an ordering edge from timestamps alone.
+      # YAML list; choices: A, B, C, D, E, F, G. Use [] for none.
+      predecessors:
+    # Complete D.
+    D:
+      # Process responsible for this step.
+      # Choices: sensor, api, worker
+      owner:
+      # Operation performed by this step.
+      # Choices: send-http-alert, validate-and-persist-queued, publish-job, return-http-response, consume-job, call-model-provider, persist-completed-summary
+      operation:
+      # Synchronous HTTP path or background processing.
+      # Choices: synchronous, asynchronous
+      execution:
+      # Immediate causal predecessors only. Do not add an ordering edge from timestamps alone.
+      # YAML list; choices: A, B, C, D, E, F, G. Use [] for none.
+      predecessors:
+    # Complete E.
+    E:
+      # Process responsible for this step.
+      # Choices: sensor, api, worker
+      owner:
+      # Operation performed by this step.
+      # Choices: send-http-alert, validate-and-persist-queued, publish-job, return-http-response, consume-job, call-model-provider, persist-completed-summary
+      operation:
+      # Synchronous HTTP path or background processing.
+      # Choices: synchronous, asynchronous
+      execution:
+      # Immediate causal predecessors only. Do not add an ordering edge from timestamps alone.
+      # YAML list; choices: A, B, C, D, E, F, G. Use [] for none.
+      predecessors:
+    # Complete F.
+    F:
+      # Process responsible for this step.
+      # Choices: sensor, api, worker
+      owner:
+      # Operation performed by this step.
+      # Choices: send-http-alert, validate-and-persist-queued, publish-job, return-http-response, consume-job, call-model-provider, persist-completed-summary
+      operation:
+      # Synchronous HTTP path or background processing.
+      # Choices: synchronous, asynchronous
+      execution:
+      # Immediate causal predecessors only. Do not add an ordering edge from timestamps alone.
+      # YAML list; choices: A, B, C, D, E, F, G. Use [] for none.
+      predecessors:
+    # Complete G.
+    G:
+      # Process responsible for this step.
+      # Choices: sensor, api, worker
+      owner:
+      # Operation performed by this step.
+      # Choices: send-http-alert, validate-and-persist-queued, publish-job, return-http-response, consume-job, call-model-provider, persist-completed-summary
+      operation:
+      # Synchronous HTTP path or background processing.
+      # Choices: synchronous, asynchronous
+      execution:
+      # Immediate causal predecessors only. Do not add an ordering edge from timestamps alone.
+      # YAML list; choices: A, B, C, D, E, F, G. Use [] for none.
+      predecessors:
+  # Complete two outcome table.
+  two_outcome_table:
+    # Complete normal.
+    normal:
+      # Observed HTTP status.
+      # Choices: 200, 202, 400, 422, 500
+      http_status:
+      # Does this reading create queued exception work?
+      # Choices: yes, no
+      queued:
+      # Does this reading invoke ModelProvider?
+      # Choices: yes, no
+      model_called:
+      # Persistence outcome for this reading.
+      # Choices: no-exception-record, queued-then-completed, failed-record
+      persistence:
+    # Complete exception.
+    exception:
+      # Observed HTTP status.
+      # Choices: 200, 202, 400, 422, 500
+      http_status:
+      # Does this reading create queued exception work?
+      # Choices: yes, no
+      queued:
+      # Does this reading invoke ModelProvider?
+      # Choices: yes, no
+      model_called:
+      # Persistence outcome for this reading.
+      # Choices: no-exception-record, queued-then-completed, failed-record
+      persistence:
+  # Complete boundary evidence.
+  boundary_evidence:
+    # Select primary evidence for the API boundary: response, stream, processing/log, model span or saved record as applicable.
+    # Choices: HTTP, QUEUE, WORKER, MODEL, STATE, API-TRACE, METRIC, SRC-API, SRC-ROUTES, SRC-WORKER, SRC-METRIC, SRC-QUEUE, SRC-RUNTIME, sample-only
+    API:
+    # Select primary evidence for the Queue boundary: response, stream, processing/log, model span or saved record as applicable.
+    # Choices: HTTP, QUEUE, WORKER, MODEL, STATE, API-TRACE, METRIC, SRC-API, SRC-ROUTES, SRC-WORKER, SRC-METRIC, SRC-QUEUE, SRC-RUNTIME, sample-only
+    Queue:
+    # Select primary evidence for the Worker boundary: response, stream, processing/log, model span or saved record as applicable.
+    # Choices: HTTP, QUEUE, WORKER, MODEL, STATE, API-TRACE, METRIC, SRC-API, SRC-ROUTES, SRC-WORKER, SRC-METRIC, SRC-QUEUE, SRC-RUNTIME, sample-only
+    Worker:
+    # Select primary evidence for the Model boundary: response, stream, processing/log, model span or saved record as applicable.
+    # Choices: HTTP, QUEUE, WORKER, MODEL, STATE, API-TRACE, METRIC, SRC-API, SRC-ROUTES, SRC-WORKER, SRC-METRIC, SRC-QUEUE, SRC-RUNTIME, sample-only
+    Model:
+    # Select primary evidence for the Database boundary: response, stream, processing/log, model span or saved record as applicable.
+    # Choices: HTTP, QUEUE, WORKER, MODEL, STATE, API-TRACE, METRIC, SRC-API, SRC-ROUTES, SRC-WORKER, SRC-METRIC, SRC-QUEUE, SRC-RUNTIME, sample-only
+    Database:
+  # Complete evidence gaps.
+  evidence_gaps:
+    # Trace boundary diagnosis.
+    # Choices: continuous, queue-context-not-propagated, no-api-span
+    trace_context:
+    # Processing histogram observation unit.
+    # Choices: seconds-correct, milliseconds-under-seconds-name, no-duration-metric
+    metric_unit:
+    # Processing histogram series identity.
+    # Choices: bounded-aggregate, request-id-cardinality, no-metric-labels-known
+    metric_labels:
+  # Complete claim classifications.
+  claim_classifications:
+    # The out-of-range POST returned HTTP202.
+    # Choices: observation, inference, not-established
+    api_acceptance_observed:
+    # The publisher and worker spans for the captured exception have different trace IDs.
+    # Choices: observation, inference, not-established
+    separate_trace_ids_observed:
+    # The missing queue carrier and worker context extraction explain the disconnected trace.
+    # Choices: observation, inference, not-established
+    queue_handoff_cause:
+    # This local run establishes the production p95 latency SLO.
+    # Choices: observation, inference, not-established
+    production_slo_met:
+    # The supplied data establishes elapsed time from physical sensor detection to a dispatcher viewing the summary.
+    # Choices: observation, inference, not-established
+    sensor_to_dispatcher_latency:
+    # The model_provider.summarize span is a child of the processing span.
+    # Choices: observation, inference, not-established
+    model_nested_in_worker:
+  # Complete timing interpretation.
+  timing_interpretation:
+    # Subtract persisted_record.accepted_at from updated_at. Use seconds, rounded to three decimal places; absolute tolerance 0.001 seconds.
+    accepted_to_terminal_seconds:
+    # Convert coldline.process_exception duration from Jaeger microseconds. Use seconds, rounded to three decimal places; absolute tolerance 0.001 seconds.
+    worker_span_seconds:
+    # Convert model_provider.summarize duration from Jaeger microseconds. Use seconds, rounded to three decimal places; absolute tolerance 0.001 seconds.
+    model_span_seconds:
+    # What interval do the record timestamps establish?
+    # Choices: sensor-to-dispatcher, accepted-to-terminal-persistence, http-round-trip
+    coverage:
